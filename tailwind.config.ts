@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        comfortaa: ['Comfortaa', 'system-ui', 'sans-serif'],
+        patrick: ['Patrick Hand', 'cursive', 'system-ui'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -80,10 +84,33 @@ export default {
             height: "0",
           },
         },
+        "sparkle-float": {
+          "0%": {
+            transform: "translateY(0) rotate(0deg)",
+          },
+          "50%": {
+            transform: "translateY(-10px) rotate(10deg)",
+          },
+          "100%": {
+            transform: "translateY(0) rotate(0deg)",
+          },
+        },
+        "page-enter": {
+          from: {
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "sparkle-float": "sparkle-float 3s infinite ease-in-out",
+        "page-enter": "page-enter 0.8s forwards ease-out",
       },
     },
   },
