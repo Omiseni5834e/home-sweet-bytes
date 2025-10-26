@@ -10,19 +10,20 @@ const TOTAL_PIECES = ROWS * COLS;
 interface PuzzleState {
   placed: boolean[];
   completed: boolean;
-  showFinal: boolean;
-  capturedImage: string | null;
+  showCamera: boolean;
+  showPhoto: boolean;
+  photoPlaced: boolean;
 }
 
 const Puzzle = () => {
   const [state, setState] = useState<PuzzleState>({
     placed: Array(TOTAL_PIECES).fill(false),
     completed: false,
-    showFinal: false,
-    capturedImage: null,
+    showCamera: false,
+    showPhoto: false,
+    photoPlaced: false,
   });
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const puzzleRef = useRef<HTMLDivElement>(null);
 
   const placePiece = (index: number) => {
     if (state.placed[index] || state.completed) return;
@@ -34,80 +35,44 @@ const Puzzle = () => {
     const placedCount = newPlaced.filter(p => p).length;
     const isComplete = placedCount === TOTAL_PIECES - 1;
     
-    setState({
-      ...state,
-      placed: newPlaced,
-      completed: isComplete,
-    });
-
-    if (isComplete) {
-      setTimeout(() => startCamera(), 1000);
-    }
-  };
-
-  const startCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: 'user' } 
-      });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play();
-        setTimeout(() => capturePhoto(stream), 2000);
-      }
-    } catch (err) {
-      console.error("Camera error:", err);
-      // Continue without camera
-      setTimeout(() => completeWithoutCamera(), 1000);
-    }
-  };
-
-  const capturePhoto = (stream: MediaStream) => {
-    if (videoRef.current && canvasRef.current) {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-      
-      if (ctx) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0);
-        const imageData = canvas.toDataURL('image/png');
-        
-        setState(prev => ({
-          ...prev,
-          capturedImage: imageData,
-          showFinal: true,
-        }));
-        
-        // Stop camera
-        stream.getTracks().forEach(track => track.stop());
-        
-        // Place final piece
-        setTimeout(() => {
-          setState(prev => {
-            const newPlaced = [...prev.placed];
-            newPlaced[TOTAL_PIECES - 1] = true;
-            return { ...prev, placed: newPlaced };
-          });
-        }, 1500);
-      }
-    }
-  };
-
-  const completeWithoutCamera = () => {
     setState(prev => ({
       ...prev,
-      showFinal: true,
+      placed: newPlaced,
+      completed: isComplete,
     }));
-    
-    setTimeout(() => {
-      setState(prev => {
-        const newPlaced = [...prev.placed];
+
+    if (isComplete) {
+      // Show camera animation
+      setTimeout(() => {
+        setState(prev => ({ ...prev, showCamera: true }));
+      }, 1000);
+      
+      // Photo comes out
+      setTimeout(() => {
+        setState(prev => ({ ...prev, showPhoto: true }));
+      }, 3000);
+      
+      // Photo goes to last slot
+      setTimeout(() => {
+        setState(prev => ({ ...prev, photoPlaced: true }));
+        const newPlaced = [...state.placed];
         newPlaced[TOTAL_PIECES - 1] = true;
-        return { ...prev, placed: newPlaced };
+        setState(prev => ({ ...prev, placed: newPlaced }));
+      }, 4500);
+    }
+  };
+
+  const downloadPuzzle = () => {
+    if (puzzleRef.current) {
+      import('html2canvas').then((html2canvas) => {
+        html2canvas.default(puzzleRef.current!).then((canvas) => {
+          const link = document.createElement('a');
+          link.download = 'our-puzzle-complete.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        });
       });
-    }, 1500);
+    }
   };
 
   return (
@@ -130,8 +95,9 @@ const Puzzle = () => {
           </p>
         </header>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center relative">
           <div 
+            ref={puzzleRef}
             className="relative inline-grid gap-1 bg-muted/30 p-4 rounded-2xl shadow-lg"
             style={{
               gridTemplateColumns: `repeat(${COLS}, 1fr)`,
@@ -150,7 +116,7 @@ const Puzzle = () => {
                   className={`
                     relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-lg overflow-hidden
                     ${state.placed[index] ? 'opacity-100' : 'opacity-20 cursor-pointer hover:opacity-40'}
-                    ${isLastPiece && state.showFinal && !state.placed[index] ? 'animate-[float_2s_ease-in-out_infinite]' : ''}
+                    ${isLastPiece && state.showPhoto && !state.placed[index] ? 'animate-[float_2s_ease-in-out_infinite]' : ''}
                     transition-all duration-500
                   `}
                   style={{
@@ -173,46 +139,51 @@ const Puzzle = () => {
           </div>
         </div>
 
+        {/* Camera animation */}
+        {state.showCamera && (
+          <div className="fixed inset-0 pointer-events-none z-40 flex items-center justify-center">
+            <div className="animate-[cameraFloat_2s_ease-in-out]">
+              <div className="relative">
+                {/* Camera body */}
+                <div className="w-32 h-24 bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-2xl border-4 border-gray-700">
+                  {/* Lens */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full border-4 border-gray-500 flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full animate-pulse" />
+                  </div>
+                  {/* Flash */}
+                  <div className="absolute top-2 right-2 w-4 h-4 bg-yellow-300 rounded-sm animate-[flash_0.5s_ease-in-out_2]" />
+                </div>
+                
+                {/* Polaroid photo coming out */}
+                {state.showPhoto && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 animate-[photoSlide_1.5s_ease-out]">
+                    <div className="bg-white p-3 pb-8 rounded-lg shadow-xl w-28">
+                      <div className="bg-gradient-to-br from-pink-100 to-purple-100 aspect-square rounded" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Final message overlay */}
-        {state.completed && (
+        {state.completed && state.photoPlaced && (
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
             <div className="text-center space-y-8 px-6">
               <h2 className="font-comfortaa text-3xl md:text-5xl font-bold text-white animate-scale-in drop-shadow-lg">
                 You always are the last piece<br />of my every puzzle
               </h2>
               
-              {/* Polaroid camera effect */}
-              {state.showFinal && (
-                <div className="animate-[slideUp_1s_ease-out] mx-auto">
-                  <div className="bg-white p-4 pb-12 rounded-lg shadow-2xl max-w-sm mx-auto transform hover:rotate-2 transition-transform">
-                    <div className="bg-gray-200 aspect-square rounded overflow-hidden">
-                      {state.capturedImage ? (
-                        <img 
-                          src={state.capturedImage} 
-                          alt="Captured" 
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <video 
-                          ref={videoRef}
-                          className="w-full h-full object-cover"
-                          playsInline
-                          muted
-                        />
-                      )}
-                    </div>
-                    <p className="font-patrick text-xl text-gray-700 mt-4 text-center">
-                      The missing piece 💝
-                    </p>
-                  </div>
-                </div>
-              )}
+              <button
+                onClick={downloadPuzzle}
+                className="px-6 py-3 bg-white text-primary font-comfortaa font-bold rounded-full shadow-lg hover:scale-105 transition-transform"
+              >
+                Download Our Puzzle 💝
+              </button>
             </div>
           </div>
         )}
-
-        {/* Hidden canvas for photo capture */}
-        <canvas ref={canvasRef} className="hidden" />
       </div>
     </div>
   );
