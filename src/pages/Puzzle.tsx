@@ -121,7 +121,7 @@ const Puzzle = () => {
                   `}
                   style={{
                     backgroundImage: state.placed[index] ? `url(${puzzleImage})` : 'none',
-                    backgroundPosition: `-${col * (100 / (COLS - 1))}% -${row * (100 / (ROWS - 1))}%`,
+                    backgroundPosition: `${-col * 100}% ${-row * 100}%`,
                     backgroundSize: `${COLS * 100}% ${ROWS * 100}%`,
                     backgroundColor: state.placed[index] ? 'transparent' : 'rgba(0,0,0,0.1)',
                     border: '2px solid rgba(255,255,255,0.3)',
