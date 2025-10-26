@@ -5,6 +5,7 @@ interface AnniversaryCardProps {
   title: string;
   href: string;
   variant?: "pink" | "blue" | "purple" | "green" | "orange" | "yellow";
+  "data-tour"?: string;
 }
 
 const gradientMap = {
@@ -16,11 +17,11 @@ const gradientMap = {
   yellow: "from-[hsl(var(--gradient-yellow-from))] to-[hsl(var(--gradient-yellow-to))]",
 };
 
-export const AnniversaryCard = ({ title, href, variant = "pink" }: AnniversaryCardProps) => {
+export const AnniversaryCard = ({ title, href, variant = "pink", "data-tour": dataTour }: AnniversaryCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
-    <Link to={href}>
+    <Link to={href} data-tour={dataTour}>
       <div
         className={`
           w-[220px] h-[160px] 

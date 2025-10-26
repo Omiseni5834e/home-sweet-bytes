@@ -194,3 +194,19 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
   }
 }
+
+/* Tour highlight effect */
+.tour-highlight {
+  position: relative;
+  z-index: 50;
+  animation: tourPulse 2s ease-in-out infinite;
+}
+
+@keyframes tourPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 20px hsl(var(--primary) / 0);
+  }
+}

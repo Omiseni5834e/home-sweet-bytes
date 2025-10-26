@@ -30,6 +30,7 @@ const Index = () => {
               title="Collage Puzzle Page" 
               href="/puzzle" 
               variant="blue"
+              data-tour="puzzle-card"
             />
             <AnniversaryCard 
               title="Final Video" 
