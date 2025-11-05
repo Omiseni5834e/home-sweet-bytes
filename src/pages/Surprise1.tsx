@@ -160,40 +160,40 @@ const Surprise1 = () => {
   return (
     <div className="h-screen overflow-hidden bg-background">
       {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-50 p-4 bg-gradient-to-b from-background/90 to-transparent">
-        <div className="flex items-center justify-between mb-3">
+      <div className="absolute top-0 left-0 right-0 z-50 p-3 sm:p-4 bg-gradient-to-b from-background/90 to-transparent safe-top">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 font-comfortaa text-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1.5 sm:gap-2 font-comfortaa text-sm sm:text-base text-foreground hover:text-primary transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden xs:inline">Back</span>
           </Link>
           <Button
             variant="outline"
             size="icon"
-            className="rounded-full bg-background/80 backdrop-blur-sm"
+            className="rounded-full bg-background/80 backdrop-blur-sm h-9 w-9 sm:h-10 sm:w-10"
             onClick={() => setMuted(!muted)}
           >
-            {muted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+            {muted ? <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" /> : <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />}
           </Button>
         </div>
         
         {/* Progress Bar */}
-        <div className="px-2">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="px-1 sm:px-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
             <div className="flex-1 h-1 bg-background/50 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-primary transition-all duration-500"
                 style={{ width: `${(viewedReels.size / reels.length) * 100}%` }}
               />
             </div>
-            <span className="font-comfortaa text-sm font-semibold text-foreground">
+            <span className="font-comfortaa text-xs sm:text-sm font-semibold text-foreground whitespace-nowrap">
               {viewedReels.size}/{reels.length}
             </span>
           </div>
           {showCompletionMessage && (
-            <p className="text-center font-patrick text-sm text-primary animate-fade-in">
+            <p className="text-center font-patrick text-xs sm:text-sm text-primary animate-fade-in">
               ✨ All memories watched! ✨
             </p>
           )}
@@ -222,12 +222,12 @@ const Surprise1 = () => {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20">
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">🎥</div>
-                  <p className="font-comfortaa text-2xl font-bold text-foreground mb-2">
+                <div className="text-center p-4 sm:p-8">
+                  <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🎥</div>
+                  <p className="font-comfortaa text-xl sm:text-2xl font-bold text-foreground mb-1 sm:mb-2">
                     Video {index + 1}
                   </p>
-                  <p className="font-patrick text-lg text-muted-foreground">
+                  <p className="font-patrick text-base sm:text-lg text-muted-foreground">
                     Add your video here
                   </p>
                 </div>
@@ -235,42 +235,42 @@ const Surprise1 = () => {
             )}
 
             {/* Instagram-style Actions */}
-            <div className="absolute right-4 bottom-32 flex flex-col gap-6 z-40">
+            <div className="absolute right-2 sm:right-4 bottom-24 sm:bottom-32 flex flex-col gap-4 sm:gap-6 z-40">
               <button
                 onClick={() => handleLike(index)}
-                className="flex flex-col items-center gap-1 transition-transform hover:scale-110"
+                className="flex flex-col items-center gap-0.5 sm:gap-1 transition-transform active:scale-95 min-w-[44px] min-h-[44px] justify-center"
               >
                 <Heart 
-                  className={`w-7 h-7 ${liked.has(index) ? 'fill-red-500 text-red-500' : 'text-white'}`}
+                  className={`w-7 h-7 sm:w-8 sm:h-8 ${liked.has(index) ? 'fill-red-500 text-red-500' : 'text-white drop-shadow-lg'}`}
                 />
-                <span className="text-xs font-semibold text-white">
+                <span className="text-xs font-semibold text-white drop-shadow-lg">
                   {liked.has(index) ? '1' : ''}
                 </span>
               </button>
               
               <button
                 onClick={handleComment}
-                className="flex flex-col items-center gap-1 transition-transform hover:scale-110"
+                className="flex flex-col items-center gap-0.5 sm:gap-1 transition-transform active:scale-95 min-w-[44px] min-h-[44px] justify-center"
               >
-                <MessageCircle className="w-7 h-7 text-white" />
+                <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
               </button>
               
               <button
                 onClick={handleShare}
-                className="flex flex-col items-center gap-1 transition-transform hover:scale-110"
+                className="flex flex-col items-center gap-0.5 sm:gap-1 transition-transform active:scale-95 min-w-[44px] min-h-[44px] justify-center"
               >
-                <Share2 className="w-7 h-7 text-white" />
+                <Share2 className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
               </button>
             </div>
 
             {/* Bottom Info and Menu */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent">
-              <div className="flex items-end justify-between">
-                <div className="flex-1">
-                  <h2 className="font-comfortaa text-2xl font-bold text-white mb-1">
+            <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 pb-4 sm:pb-6 bg-gradient-to-t from-background/90 to-transparent safe-bottom">
+              <div className="flex items-end justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-comfortaa text-lg sm:text-2xl font-bold text-white mb-0.5 sm:mb-1 drop-shadow-lg truncate">
                     {reel.title}
                   </h2>
-                  <p className="font-patrick text-lg text-white/90">
+                  <p className="font-patrick text-sm sm:text-lg text-white/90 drop-shadow-lg line-clamp-2">
                     {reel.description}
                   </p>
                 </div>
@@ -281,9 +281,9 @@ const Surprise1 = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="text-white hover:bg-white/20 rounded-full"
+                      className="text-white hover:bg-white/20 rounded-full h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0"
                     >
-                      <MoreVertical className="w-5 h-5" />
+                      <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="bg-background/95 backdrop-blur-sm">
@@ -301,8 +301,8 @@ const Surprise1 = () => {
 
             {/* Scroll Indicator */}
             {index === 0 && (
-              <div className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-bounce">
-                <div className="text-foreground/60 text-sm font-comfortaa">Scroll down</div>
+              <div className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 animate-bounce">
+                <div className="text-white/60 text-xs sm:text-sm font-comfortaa drop-shadow-lg">Scroll down</div>
               </div>
             )}
           </div>
