@@ -9,18 +9,18 @@ const Index = () => {
       <FloatingSparkle delay={1} top="120px" right="80px" />
       <FloatingSparkle delay={2} bottom="60px" left="200px" />
       
-      <div className="min-h-screen p-9 animate-page-enter">
+      <div className="min-h-screen p-4 sm:p-6 md:p-9 animate-page-enter">
         <div className="max-w-[1200px] mx-auto">
-          <header className="text-center mb-6">
-            <h1 className="font-comfortaa text-[32px] font-bold mb-1 text-foreground">
+          <header className="text-center mb-4 sm:mb-6">
+            <h1 className="font-comfortaa text-2xl sm:text-3xl md:text-[32px] font-bold mb-1 text-foreground px-2">
               Our Anniversary Celebration
             </h1>
-            <p className="font-comfortaa text-base text-muted-foreground m-0">
+            <p className="font-comfortaa text-sm sm:text-base text-muted-foreground m-0 px-2">
               Click on a card to enter each surprise page 💖
             </p>
           </header>
 
-          <section className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-7 p-4.5 justify-items-center">
+          <section className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-7 p-2 sm:p-4 justify-items-center">
             <AnniversaryCard 
               title="Scrapbook — Our Memories" 
               href="/scrapbook" 

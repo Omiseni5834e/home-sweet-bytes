@@ -24,38 +24,50 @@ const Surprise1 = () => {
     {
       id: 1,
       videoSrc: "", // User will provide
-      title: "Memory 1",
-      description: "Our special moment ❤️"
+      title: "Greeting 1",
+      description: "A special hello from us! 👋"
     },
     {
       id: 2,
       videoSrc: "", // User will provide
-      title: "Memory 2",
-      description: "Forever together 💕"
+      title: "Greeting 2",
+      description: "Saying hi with love 💕"
     },
     {
       id: 3,
       videoSrc: "", // User will provide
-      title: "Memory 3",
-      description: "Love and laughter 🌟"
+      title: "Greeting 3",
+      description: "Hello from our hearts 🌟"
     },
     {
       id: 4,
       videoSrc: "", // User will provide
-      title: "Memory 4",
-      description: "Our adventure 🎉"
+      title: "Greeting 4",
+      description: "A warm welcome 🎉"
     },
     {
       id: 5,
       videoSrc: "", // User will provide
-      title: "Memory 5",
-      description: "Always and forever 💖"
+      title: "Greeting 5",
+      description: "Hi there! 💖"
     },
     {
       id: 6,
       videoSrc: "", // User will provide
-      title: "Memory 6",
-      description: "Our beautiful journey 🌈"
+      title: "Greeting 6",
+      description: "Sending you greetings 🌈"
+    },
+    {
+      id: 7,
+      videoSrc: "", // User will provide
+      title: "Greeting 7",
+      description: "Hello from us 💫"
+    },
+    {
+      id: 8,
+      videoSrc: "", // User will provide
+      title: "Greeting 8",
+      description: "Final hello! 🎊"
     }
   ];
 
@@ -105,7 +117,7 @@ const Surprise1 = () => {
       setShowCompletionMessage(true);
       toast({
         title: "🎉 You're all done!",
-        description: "You've watched all our special memories together ❤️",
+        description: "You've watched all the greetings! ❤️",
         duration: 5000,
       });
     }
@@ -194,7 +206,7 @@ const Surprise1 = () => {
           </div>
           {showCompletionMessage && (
             <p className="text-center font-patrick text-xs sm:text-sm text-primary animate-fade-in">
-              ✨ All memories watched! ✨
+              ✨ All greetings watched! ✨
             </p>
           )}
         </div>

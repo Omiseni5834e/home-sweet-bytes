@@ -80,25 +80,25 @@ const Puzzle = () => {
       <div className="max-w-[1400px] mx-auto">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 mb-6 font-comfortaa text-secondary hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 sm:gap-2 mb-4 sm:mb-6 font-comfortaa text-sm sm:text-base text-secondary hover:text-primary transition-colors"
         >
-          <ArrowLeft className="w-5 h-5" />
-          Back to Home
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="hidden xs:inline">Back to Home</span>
         </Link>
         
-        <header className="text-center mb-8">
-          <h1 className="font-comfortaa text-3xl md:text-4xl font-bold mb-4 text-foreground">
+        <header className="text-center mb-6 sm:mb-8 px-2">
+          <h1 className="font-comfortaa text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">
             Collage Puzzle Page
           </h1>
-          <p className="font-patrick text-lg md:text-xl text-muted-foreground">
+          <p className="font-patrick text-base sm:text-lg md:text-xl text-muted-foreground">
             Click the pieces to complete the puzzle 🧩
           </p>
         </header>
 
-        <div className="flex justify-center items-center relative">
+        <div className="flex justify-center items-center relative overflow-x-auto px-2">
           <div 
             ref={puzzleRef}
-            className="relative inline-grid gap-1 bg-muted/30 p-4 rounded-2xl shadow-lg"
+            className="relative inline-grid gap-0.5 sm:gap-1 bg-muted/30 p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg"
             style={{
               gridTemplateColumns: `repeat(${COLS}, 1fr)`,
               gridTemplateRows: `repeat(${ROWS}, 1fr)`,
@@ -114,8 +114,8 @@ const Puzzle = () => {
                   key={index}
                   onClick={() => placePiece(index)}
                   className={`
-                    relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-lg overflow-hidden
-                    ${state.placed[index] ? 'opacity-100' : 'opacity-20 cursor-pointer hover:opacity-40'}
+                    relative w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-md sm:rounded-lg overflow-hidden
+                    ${state.placed[index] ? 'opacity-100' : 'opacity-20 cursor-pointer active:opacity-40'}
                     ${isLastPiece && state.showPhoto && !state.placed[index] ? 'animate-[float_2s_ease-in-out_infinite]' : ''}
                     transition-all duration-500
                   `}
@@ -129,7 +129,7 @@ const Puzzle = () => {
                   }}
                 >
                   {!state.placed[index] && (
-                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-xs font-comfortaa">
+                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground text-[8px] xs:text-[10px] sm:text-xs font-comfortaa">
                       {index + 1}
                     </div>
                   )}
@@ -169,15 +169,15 @@ const Puzzle = () => {
 
         {/* Final message overlay */}
         {state.completed && state.photoPlaced && (
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-            <div className="text-center space-y-8 px-6">
-              <h2 className="font-comfortaa text-3xl md:text-5xl font-bold text-white animate-scale-in drop-shadow-lg">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in p-4">
+            <div className="text-center space-y-6 sm:space-y-8 px-4 sm:px-6">
+              <h2 className="font-comfortaa text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-white animate-scale-in drop-shadow-lg leading-tight">
                 You always are the last piece<br />of my every puzzle
               </h2>
               
               <button
                 onClick={downloadPuzzle}
-                className="px-6 py-3 bg-white text-primary font-comfortaa font-bold rounded-full shadow-lg hover:scale-105 transition-transform"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-primary font-comfortaa text-sm sm:text-base font-bold rounded-full shadow-lg active:scale-95 sm:hover:scale-105 transition-transform"
               >
                 Download Our Puzzle 💝
               </button>

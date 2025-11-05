@@ -35,34 +35,34 @@ const Poem = () => {
       <div className="max-w-[900px] mx-auto relative z-10">
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 mb-6 font-comfortaa text-secondary hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 sm:gap-2 mb-4 sm:mb-6 font-comfortaa text-sm sm:text-base text-secondary hover:text-primary transition-colors"
         >
-          <ArrowLeft className="w-5 h-5" />
-          Back to Home
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="hidden xs:inline">Back to Home</span>
         </Link>
         
-        <header className="text-center mb-8">
-          <h1 className="font-comfortaa text-3xl md:text-4xl font-bold mb-4 text-foreground">
+        <header className="text-center mb-6 sm:mb-8 px-2">
+          <h1 className="font-comfortaa text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">
             A Love Letter 💌
           </h1>
-          <p className="font-patrick text-lg md:text-xl text-muted-foreground">
+          <p className="font-patrick text-base sm:text-lg md:text-xl text-muted-foreground">
             Words from my heart to yours
           </p>
         </header>
 
         {/* Letter paper */}
-        <div className="relative mx-auto max-w-[700px]">
+        <div className="relative mx-auto max-w-[700px] px-2">
           {/* Paper with cute styling */}
-          <div className="bg-gradient-to-br from-white to-pink-50 rounded-3xl shadow-[var(--shadow-strong)] p-8 md:p-12 border-4 border-pink-100 relative">
+          <div className="bg-gradient-to-br from-white to-pink-50 rounded-2xl sm:rounded-3xl shadow-[var(--shadow-strong)] p-5 sm:p-8 md:p-12 border-2 sm:border-4 border-pink-100 relative">
             {/* Cute corner decorations */}
-            <div className="absolute top-4 left-4 text-3xl">🌸</div>
-            <div className="absolute top-4 right-4 text-3xl">🌸</div>
-            <div className="absolute bottom-4 left-4 text-3xl">💕</div>
-            <div className="absolute bottom-4 right-4 text-3xl">💕</div>
+            <div className="absolute top-2 sm:top-4 left-2 sm:left-4 text-xl sm:text-3xl">🌸</div>
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-xl sm:text-3xl">🌸</div>
+            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-xl sm:text-3xl">💕</div>
+            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 text-xl sm:text-3xl">💕</div>
             
             {/* Poem content - EDIT THIS SECTION LOCALLY */}
-            <div className="poem-content font-patrick text-lg md:text-xl leading-relaxed text-foreground space-y-6">
-              <p className="text-center font-bold text-2xl mb-6 text-primary">
+            <div className="poem-content font-patrick text-base sm:text-lg md:text-xl leading-relaxed text-foreground space-y-4 sm:space-y-6">
+              <p className="text-center font-bold text-xl sm:text-2xl mb-4 sm:mb-6 text-primary">
                 To My Dearest Love
               </p>
               
@@ -87,7 +87,7 @@ const Poem = () => {
                 My heart will always belong to you.
               </p>
               
-              <p className="text-center mt-8 font-bold text-xl">
+              <p className="text-center mt-6 sm:mt-8 font-bold text-lg sm:text-xl">
                 Forever yours,<br />
                 With all my love 💝
               </p>
@@ -95,8 +95,8 @@ const Poem = () => {
           </div>
           
           {/* Washi tape effect on corners */}
-          <div className="absolute -top-3 left-12 w-24 h-6 bg-pink-200/80 -rotate-12 rounded-sm shadow-md border-t-2 border-pink-300" />
-          <div className="absolute -top-3 right-12 w-24 h-6 bg-purple-200/80 rotate-12 rounded-sm shadow-md border-t-2 border-purple-300" />
+          <div className="hidden sm:block absolute -top-3 left-12 w-24 h-6 bg-pink-200/80 -rotate-12 rounded-sm shadow-md border-t-2 border-pink-300" />
+          <div className="hidden sm:block absolute -top-3 right-12 w-24 h-6 bg-purple-200/80 rotate-12 rounded-sm shadow-md border-t-2 border-purple-300" />
         </div>
       </div>
       
