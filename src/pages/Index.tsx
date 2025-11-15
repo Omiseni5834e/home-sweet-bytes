@@ -21,17 +21,21 @@ const Index = () => {
           </header>
 
           <section className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-7 p-2 sm:p-4 justify-items-center">
-            <AnniversaryCard 
-              title="Scrapbook — Our Memories" 
-              href="/scrapbook" 
-              variant="pink"
-            />
-            <AnniversaryCard 
-              title="Collage Puzzle Page" 
-              href="/puzzle" 
-              variant="blue"
-              data-tour="puzzle-card"
-            />
+            <div data-card="scrapbook">
+              <AnniversaryCard 
+                title="Scrapbook — Our Memories" 
+                href="/scrapbook" 
+                variant="pink"
+              />
+            </div>
+            <div data-card="puzzle">
+              <AnniversaryCard 
+                title="Collage Puzzle Page" 
+                href="/puzzle" 
+                variant="blue"
+                data-tour="puzzle-card"
+              />
+            </div>
             <AnniversaryCard 
               title="Final Video" 
               href="/video" 
